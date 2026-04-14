@@ -4,5 +4,9 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to   = "/index.html"
   status = 200
+
+# Gym reminder — runs every minute, sends SMS when clock matches GYM_REMINDER_TIMES
+[functions."gym-reminder"]
+  schedule = "* * * * *"

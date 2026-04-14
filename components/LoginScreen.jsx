@@ -1,4 +1,4 @@
-import { useApp } from "../store/AppContext";
+import { useApp } from '../store/AppContext';
 
 export default function LoginScreen() {
   const { employees, setCurrentUser } = useApp();
@@ -14,13 +14,13 @@ export default function LoginScreen() {
 
         <div className="login-section-label">Managers</div>
         <ul className="profile-list">
-          {employees.filter(e => e.role === "manager").map(emp => (
+          {employees.filter(e => e.role === 'manager').map(emp => (
             <li key={emp.id}>
               <button className="profile-btn manager" onClick={() => setCurrentUser(emp)}>
                 <span className="profile-avatar">{emp.name[0]}</span>
                 <div className="profile-info">
                   <span className="profile-name">{emp.name}</span>
-                  <span className="profile-meta">Manager · Can assign & view all tasks</span>
+                  <span className="profile-meta">Manager · Can assign &amp; view all tasks</span>
                 </div>
                 <span className="profile-arrow">→</span>
               </button>
@@ -28,9 +28,9 @@ export default function LoginScreen() {
           ))}
         </ul>
 
-        <div className="login-section-label" style={{marginTop:"20px"}}>Employees</div>
+        <div className="login-section-label" style={{ marginTop: '20px' }}>Employees</div>
         <ul className="profile-list">
-          {employees.filter(e => e.role === "employee").map(emp => (
+          {employees.filter(e => e.role === 'employee').map(emp => (
             <li key={emp.id}>
               <button className="profile-btn" onClick={() => setCurrentUser(emp)}>
                 <span className="profile-avatar">{emp.name[0]}</span>

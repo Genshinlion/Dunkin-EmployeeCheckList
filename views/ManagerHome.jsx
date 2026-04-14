@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useApp } from "../store/AppContext";
-import AssignTaskModal from "../components/AssignTaskModal";
-import EditTaskModal   from "../components/EditTaskModal";
+import { useState } from 'react';
+import { useApp } from '../store/AppContext';
+import AssignTaskModal from '../components/AssignTaskModal';
+import EditTaskModal   from '../components/EditTaskModal';
 
-const TABS = ["Team Overview", "All Tasks", "Swap Log"];
+const TABS = ['Team Overview', 'All Tasks', 'Swap Log'];
 
 export default function ManagerHome() {
-  const [tab, setTab] = useState(0);
+  const [tab,        setTab]        = useState(0);
   const [showAssign, setShowAssign] = useState(false);
   const [editTask,   setEditTask]   = useState(null);
 
@@ -22,7 +22,7 @@ export default function ManagerHome() {
         {TABS.map((t, i) => (
           <button
             key={t}
-            className={`tab-btn ${tab === i ? "active" : ""}`}
+            className={`tab-btn ${tab === i ? 'active' : ''}`}
             onClick={() => setTab(i)}
           >{t}</button>
         ))}
@@ -54,9 +54,9 @@ function TeamOverview({ onEditTask }) {
         const cleared = tasks.length > 0 && done.length === tasks.length;
 
         return (
-          <div key={emp.id} className={`emp-card ${cleared ? "cleared" : ""}`}>
+          <div key={emp.id} className={`emp-card ${cleared ? 'cleared' : ''}`}>
             <div className="emp-card-top">
-              <div className={`emp-avatar-lg ${cleared ? "done" : ""}`}>
+              <div className={`emp-avatar-lg ${cleared ? 'done' : ''}`}>
                 {emp.name[0]}
               </div>
               <div>
@@ -73,8 +73,8 @@ function TeamOverview({ onEditTask }) {
 
             <ul className="emp-task-mini">
               {tasks.map(t => (
-                <li key={t.id} className={`emp-task-mini-row ${isCompleted(t.id) ? "done" : ""}`}>
-                  <span className="mini-check">{isCompleted(t.id) ? "✓" : "○"}</span>
+                <li key={t.id} className={`emp-task-mini-row ${isCompleted(t.id) ? 'done' : ''}`}>
+                  <span className="mini-check">{isCompleted(t.id) ? '✓' : '○'}</span>
                   <span>{t.title}</span>
                   <button className="mini-edit" onClick={() => onEditTask(t)}>edit</button>
                 </li>
@@ -90,7 +90,7 @@ function TeamOverview({ onEditTask }) {
   );
 }
 
-// ── All Tasks flat list ───────────────────────────────────────────────────────
+// ── All Tasks ─────────────────────────────────────────────────────────────────
 function AllTasks({ onEditTask }) {
   const { tasks, getEmployee, isCompleted, deleteTask } = useApp();
 
@@ -99,11 +99,7 @@ function AllTasks({ onEditTask }) {
       <table className="task-table">
         <thead>
           <tr>
-            <th>Task</th>
-            <th>Category</th>
-            <th>Assigned To</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>Task</th><th>Category</th><th>Assigned To</th><th>Status</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -111,13 +107,13 @@ function AllTasks({ onEditTask }) {
             const emp  = getEmployee(t.assignedTo);
             const done = isCompleted(t.id);
             return (
-              <tr key={t.id} className={done ? "row-done" : ""}>
+              <tr key={t.id} className={done ? 'row-done' : ''}>
                 <td className="td-title">{t.title}</td>
                 <td><span className="cat-tag">{t.category}</span></td>
-                <td>{emp?.name ?? "—"}</td>
+                <td>{emp?.name ?? '—'}</td>
                 <td>
-                  <span className={`status-dot ${done ? "done" : "pending"}`}>
-                    {done ? "Done" : "Pending"}
+                  <span className={`status-dot ${done ? 'done' : 'pending'}`}>
+                    {done ? 'Done' : 'Pending'}
                   </span>
                 </td>
                 <td className="td-actions">
@@ -154,7 +150,7 @@ function SwapLog() {
           const from = getEmployee(swap.fromId);
           const to   = getEmployee(swap.toId);
           const task = getTask(swap.taskId);
-          const time = new Date(swap.createdAt).toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
+          const time = new Date(swap.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           return (
             <li key={swap.id} className="swap-full-row">
               <div className="swap-full-top">
@@ -165,9 +161,7 @@ function SwapLog() {
                 <strong>{from?.name}</strong> → <strong>{to?.name}</strong>
                 <span className="swap-task-name">"{task?.title}"</span>
               </div>
-              {swap.reason && (
-                <div className="swap-reason">Reason: {swap.reason}</div>
-              )}
+              {swap.reason && <div className="swap-reason">Reason: {swap.reason}</div>}
             </li>
           );
         })}
